@@ -1,4 +1,4 @@
-package com.itransition.okay.sdkdemo.notifications
+package com.itransition.okay.sdkdemo.services
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,17 @@ import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
+import com.itransition.okay.sdkdemo.BuildConfig
+import com.itransition.okay.sdkdemo.fcm.*
 import com.itransition.okay.sdkdemo.repository.PreferenceRepository
-import com.itransition.okay.sdkdemo.ui.AUTH_DATA_SESSION_ID
-import com.itransition.okay.sdkdemo.ui.MainActivity
+import com.itransition.okay.sdkdemo.ui.main.AUTH_DATA_SESSION_ID
+import com.itransition.okay.sdkdemo.ui.main.MainActivity
 
 const val TAG = "Firebase"
 
 class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage!!.from!!)
 
         // Check if message contains a data payload.
@@ -32,7 +33,7 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String?) {
-        Log.d(TAG, "Refreshed token: $token")
+        if (BuildConfig.DEBUG) Log.d(TAG, "Refreshed token: $token")
         token?.run {
             PreferenceRepository(this@OkayDemoFirebaseMessagingService).saveAppPNS(token)
         }

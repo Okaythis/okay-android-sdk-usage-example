@@ -10,7 +10,7 @@
     <string name="start_login_flow">Start login flow</string>
     <string name="e_commerce_transaction">E-COMMERCE transaction</string>
     <string name="payment_card_transaction">Payment card transaction</string>
-    <string name="remittance_card_transaction">Remittance transaction</string>
+    <string name="remittance_transaction">Remittance transaction</string>
     <string name="auth_success">Transaction authorization SUCCESS</string>
     <string name="auth_error">Transaction authorization error</string>
     <string name="application_enrolled">Application enrolled</string>

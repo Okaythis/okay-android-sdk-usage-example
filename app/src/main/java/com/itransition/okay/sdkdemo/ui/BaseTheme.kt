@@ -1,7 +1,8 @@
-package com.itransition.okay.sdkdemo
+package com.itransition.okay.sdkdemo.ui
 
 import android.content.Context
 import android.graphics.Color
+import com.itransition.okay.sdkdemo.R
 import com.protectoria.psa.dex.common.ui.PageTheme
 
 class BaseTheme(context: Context) {

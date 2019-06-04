@@ -22,6 +22,10 @@ class TenantRepository {
     @Inject
     lateinit var preferenceRepository: PreferenceRepository
 
+    /**
+     * @param msisdn telephone number for TAN authorization
+     * @param type E_COMMERCE = 10, REMITTANCE = 20, PAYMENT_CARD = 30
+     */
     fun sendBankTransactionRequest(
         amount: Int, msisdn: String, type: BankTransactionType, recipient: String?
     ): Observable<Response<BankTransactionResponse>> {
@@ -60,7 +64,7 @@ data class BankTransactionResponse(
 data class ResponseStatus(
     val message: String,
     @SerializedName("code")
-    val responseStatusCode: Int
+    val responseStatusCode: String
 )
 
 enum class BankTransactionType constructor(val code: Int) {
@@ -68,32 +72,3 @@ enum class BankTransactionType constructor(val code: Int) {
     REMITTANCE(20),
     PAYMENT_CARD(30)
 }
-
-data class LinkingTenantRequest(
-    @SerializedName("username")
-    val tenantID: String = BuildConfig.TENANT_ID,
-    val password: String = BuildConfig.TENANT_PASSWORD,
-    @SerializedName("userExternalId")
-    var userID: String? = "",
-    @SerializedName("signature")
-    var signature: String = ""
-)
-
-data class LinkingTenantResponse(val linkingCode: String)
-
-data class LoginTenantRequest(
-    val formData: FormData
-)
-
-data class FormData(
-    @SerializedName("username")
-    val tenantID: String = BuildConfig.TENANT_ID,
-    val password: String = BuildConfig.TENANT_PASSWORD,
-    @SerializedName("auth-ok")
-    val authOk: String? = null,
-    @SerializedName("auth-pin")
-    val authPin: String? = null
-)
-
-
-data class LoginTenantResponse(val linkingCode: String)

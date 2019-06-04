@@ -1,4 +1,4 @@
-package com.itransition.okay.sdkdemo.notifications
+package com.itransition.okay.sdkdemo.fcm
 
 enum class SpsResponseStatusCode(val code: Int) {
     SUCCESS(0),

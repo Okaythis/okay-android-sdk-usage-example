@@ -1,4 +1,4 @@
-package com.itransition.okay.sdkdemo.notifications
+package com.itransition.okay.sdkdemo.fcm
 
 enum class NotificationType(val code: Int) {
     WAKE_UP(10),

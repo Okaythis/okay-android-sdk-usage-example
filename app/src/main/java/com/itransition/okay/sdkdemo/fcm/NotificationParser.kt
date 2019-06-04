@@ -1,4 +1,4 @@
-package com.itransition.okay.sdkdemo.notifications
+package com.itransition.okay.sdkdemo.fcm
 
 import com.google.gson.Gson
 import com.itransition.okay.sdkdemo.BuildConfig.DEBUG
