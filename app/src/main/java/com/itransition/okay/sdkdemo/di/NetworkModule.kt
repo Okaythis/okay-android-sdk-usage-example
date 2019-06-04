@@ -1,6 +1,6 @@
 package com.itransition.okay.sdkdemo.di
 
-import com.itransition.protectoria.demo_linking_app.data.retrofit.RequestsApi
+import com.itransition.okay.sdkdemo.retrofit.RequestsApi
 import com.itransition.protectoria.demo_linking_app.network.RetrofitWrapper
 import dagger.Module
 import dagger.Provides

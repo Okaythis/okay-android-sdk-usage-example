@@ -10,27 +10,18 @@ import com.itransition.okay.sdkdemo.repository.PreferenceRepository
 import com.itransition.okay.sdkdemo.ui.AUTH_DATA_SESSION_ID
 import com.itransition.okay.sdkdemo.ui.MainActivity
 
+const val TAG = "Firebase"
 
 class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
-
-    private val TAG = "Firebase"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage!!.from!!)
 
         // Check if message contains a data payload.
-        if (remoteMessage.data.size > 0) {
+        if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
-
-
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                // scheduleJob()
-            } else {
-                // Handle message within 10 seconds
-                // handleNow()
-            }
+            parseNotification(remoteMessage)
         }
 
         // Check if message contains a notification payload.
@@ -41,7 +32,7 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String?) {
-        Log.d(TAG, "Refreshed token: $token");
+        Log.d(TAG, "Refreshed token: $token")
         token?.run {
             PreferenceRepository(this@OkayDemoFirebaseMessagingService).saveAppPNS(token)
         }
@@ -49,22 +40,34 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun startMainActivityForAuth(bundle: Bundle) {
         startActivity(Intent(this, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            putExtras(bundle)
         })
     }
 
     private fun parseNotification(remoteMessage: RemoteMessage) {
-        var remoteNotification = RemoteNotification(
+        val remoteNotification = RemoteNotification(
             NotificationType.creator(remoteMessage.data["type"]!!.toInt()),
             remoteMessage.data["data"]!!
         )
-        var wakeUpNotification = WakeUpNotificationParser(Gson()).extractSpsNotification(remoteNotification)
-        wakeUpNotification?.let {
-            startMainActivityForAuth(Bundle().apply {
-                putLong(AUTH_DATA_SESSION_ID, it.sessionId)
-            })
+        when (remoteNotification.type) {
+            NotificationType.WAKE_UP -> {
+                val wakeUpNotification = WakeUpNotificationParser(Gson()).extractSpsNotification(remoteNotification)
+                wakeUpNotification?.let {
+                    startMainActivityForAuth(Bundle().apply {
+                        putLong(AUTH_DATA_SESSION_ID, it.sessionId)
+                    })
+                }
+            }
+            NotificationType.AUTH_RESULT -> {
+                val authResult = TransactionResultNotificationParser(Gson()).extractSpsNotification(remoteNotification)
+                //TODO: show result to user
+            }
+            NotificationType.UNDEFINED -> {
+                val notification = GenericNotificationParser(Gson()).extractSpsNotification(remoteNotification)
+            }
         }
-    }
 
+    }
 
 }

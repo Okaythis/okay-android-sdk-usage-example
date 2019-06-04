@@ -1,21 +1,17 @@
-package com.itransition.protectoria.demo_linking_app.data.retrofit
+package com.itransition.okay.sdkdemo.retrofit
 
+import com.itransition.okay.sdkdemo.repository.BankTransactionResponse
 import io.reactivex.Single
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-const val FB_TENANT = "/tenant-fb"
-const val API = "api"
-const val LOGIN = "login"
-const val LINKING = "link-via-app"
+const val BANK_TRANSACTION = "/bank/transaction"
 
 interface RequestsApi {
 
-    @POST("$FB_TENANT/$API/$LINKING")
-    fun linkTenant(@Body body: RequestBody): Single<Response<LinkingTenantResponse>>
+    @POST(BANK_TRANSACTION)
+    fun startBankTransaction(@Body body: RequestBody): Single<Response<BankTransactionResponse>>
 
-    @POST("$FB_TENANT/$LOGIN")
-    fun tenantLogin(@Body body: RequestBody): Single<Response<LoginTenantResponse>>
 }

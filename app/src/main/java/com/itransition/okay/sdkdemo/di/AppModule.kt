@@ -2,7 +2,7 @@ package com.itransition.okay.sdkdemo.di
 
 import android.content.Context
 import com.itransition.okay.sdkdemo.DemoApplication
-import com.itransition.protectoria.demo_linking_app.data.retrofit.TenantRepository
+import com.itransition.okay.sdkdemo.repository.TenantRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

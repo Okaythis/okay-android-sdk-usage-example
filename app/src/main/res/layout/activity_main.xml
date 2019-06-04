@@ -6,46 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_to_okay_sdk_demo_app"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnStartEnroll"
+        style="@style/MainButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/btn_start_enroll"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/btnECommerceTransaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/twEnrollStatus"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twWelcome"
         tools:text="@string/btn_start_enroll" />
 
     <Button
-        android:id="@+id/btnLinkTenant"
+        android:id="@+id/btnECommerceTransaction"
+        style="@style/MainButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/link_demo_tenant"
+        android:text="@string/e_commerce_transaction"
+        app:layout_constraintBottom_toTopOf="@+id/btnRemmitanceTenant"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStartEnroll" />
 
     <Button
-        android:id="@+id/btnLoginTenant"
+        android:id="@+id/btnRemmitanceTenant"
+        style="@style/MainButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/start_login_flow"
+        android:text="@string/remittance_card_transaction"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLinkTenant" />
+        app:layout_constraintTop_toBottomOf="@+id/btnECommerceTransaction" />
+
+    <CheckedTextView
+        android:id="@+id/twEnrollStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/application_enrolled"
+        android:checked="true"
+        android:checkMark="@drawable/ic_check_green_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStartEnroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnStartEnroll"
+        app:layout_constraintTop_toTopOf="@+id/btnStartEnroll" />
+
+    <TextView
+        android:id="@+id/twWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_okay_sdk_demo_app"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/btnStartEnroll"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
 
 </android.support.constraint.ConstraintLayout>

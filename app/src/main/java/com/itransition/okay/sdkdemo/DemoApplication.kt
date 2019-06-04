@@ -6,7 +6,7 @@ import com.itransition.okay.sdkdemo.di.AppModule
 import com.itransition.okay.sdkdemo.di.DaggerApplicationComponent
 import com.itransition.okay.sdkdemo.repository.PreferenceRepository
 import com.itransition.okay.sdkdemo.utils.SystemUtils
-import com.itransition.protectoria.demo_linking_app.data.retrofit.RequestsApi
+import com.itransition.okay.sdkdemo.retrofit.RequestsApi
 import com.itransition.protectoria.demo_linking_app.network.RetrofitWrapper
 import com.protectoria.psa.PsaManager
 

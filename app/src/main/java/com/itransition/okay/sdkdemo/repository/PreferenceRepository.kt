@@ -2,8 +2,9 @@ package com.itransition.okay.sdkdemo.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import javax.inject.Inject
 
-class PreferenceRepository constructor(context: Context) {
+class PreferenceRepository @Inject constructor(context: Context) {
 
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
@@ -24,9 +25,10 @@ class PreferenceRepository constructor(context: Context) {
         sharedPreferences.edit().putString(EXTERNAL_ID, externalID).apply()
     }
 
-    fun getExternalID() {
-        sharedPreferences.getString(EXTERNAL_ID, null)
+    fun getExternalID() : String? {
+        return sharedPreferences.getString(EXTERNAL_ID, null)
     }
+
     companion object {
         private const val APP_PNS = "app_pns"
         private const val UUID = "uuid"
