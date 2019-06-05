@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
+        // You should check if app has all permissions required by PsaManager
         checkPermissions()
-        // We check if this activity started by MessagingService with data for Authorization
+        // We check if this activity started by MessagingService with data for Authorization. And start authorization flow
         intent?.getLongExtra(AUTH_DATA_SESSION_ID, 0)?.run {
             if (this > 0) startAuthorizationActivity(this)
         }
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //If user granted all required permissions - you can start Enroll
         if (!PsaManager.getInstance().isEnrolled) {
             startEnroll()
         }
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.enroll_error), Toast.LENGTH_SHORT).show()
             }
         }
+        // Here you can receive result of the authorization flow
         if (requestCode == PsaConstants.ACTIVITY_REQUEST_CODE_PSA_AUTHORIZATION) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this, getString(R.string.auth_success), Toast.LENGTH_SHORT).show()
@@ -84,14 +87,13 @@ class MainActivity : AppCompatActivity() {
             preferenceRepository.getAppPns(),
             BuildConfig.PUB_PSS_B64,
             BuildConfig.INSTALLATION_ID,
-            null,
+            BaseTheme(this).DEFAULT_PAGE_THEME,
             PsaType.OKAY
         )
         PsaManager.startEnrollmentActivity(this@MainActivity, spaEnrollData)
     }
 
     private fun startAuthorizationActivity(sessionID: Long) {
-
         val authorizationData = SpaAuthorizationData(
             sessionID,
             PreferenceRepository(this).getAppPns(),
@@ -99,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             PsaType.OKAY
         )
         PsaManager.startAuthorizationActivity(this, authorizationData)
-        //Waiting the response on onActivityResult()
+        //Waite the response in onActivityResult()
     }
 
 }

@@ -15,7 +15,7 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
 
     val startEnroll: MutableLiveData<Unit> = MutableLiveData()
 
-    // This is only for demo the user flow. In yor application - it's yor responsibility how to perform transactions
+    // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startPaymentCardTransaction() {
         tenantRepository.sendBankTransactionRequest(128, "12345678", BankTransactionType.PAYMENT_CARD, "AlphaOmega")
             .observeOn(AndroidSchedulers.mainThread())
@@ -26,7 +26,7 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
             }).let { disposables.add(it) }
     }
 
-    // This is only for demo the user flow. In yor application - it's yor responsibility how to perform transactions
+    // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startRemittanceTransaction() {
         tenantRepository.sendBankTransactionRequest(200, "12345678", BankTransactionType.REMITTANCE, "AlphaOmega")
             .observeOn(AndroidSchedulers.mainThread())
@@ -37,7 +37,7 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
             }).let { disposables.add(it) }
     }
 
-    // This is only for demo the user flow. In yor application - it's yor responsibility how to perform transactions
+    // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startECommerceTransaction() {
         tenantRepository.sendBankTransactionRequest(500, "12345678", BankTransactionType.E_COMMERCE, "AlphaOmega")
             .observeOn(AndroidSchedulers.mainThread())
