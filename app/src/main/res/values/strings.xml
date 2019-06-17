@@ -4,7 +4,6 @@
     <string name="enroll_error">Enrollment error</string>
     <string name="btn_start_enroll">Start enroll</string>
     <string name="already_enrolled">Already enrolled</string>
-    <string name="not_enrolled">Not enrolled</string>
     <string name="welcome_to_okay_sdk_demo_app">Welcome to Okay SDK demo app</string>
     <string name="link_demo_tenant">Link demo tenant</string>
     <string name="start_login_flow">Start login flow</string>
@@ -14,4 +13,6 @@
     <string name="auth_success">Transaction authorization SUCCESS</string>
     <string name="auth_error">Transaction authorization error</string>
     <string name="application_enrolled">Application enrolled</string>
+    <string name="application_not_enrolled">Application not enrolled</string>
+    <string name="reset_enroll">reset enroll</string>
 </resources>

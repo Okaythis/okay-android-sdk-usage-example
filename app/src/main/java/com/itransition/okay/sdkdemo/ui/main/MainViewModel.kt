@@ -14,6 +14,11 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
     }
 
     val startEnroll: MutableLiveData<Unit> = MutableLiveData()
+    private val resetEnroll: MutableLiveData<Unit> = MutableLiveData()
+
+    fun loadStates() {
+        isEnrolled.value = PsaManager.getInstance().isEnrolled
+    }
 
     // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startPaymentCardTransaction() {
@@ -46,5 +51,15 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
             }, {
                 message.value = it.message.toString()
             }).let { disposables.add(it) }
+    }
+
+    fun getResetEnroll() = resetEnroll
+
+    fun startEnroll() {
+        startEnroll.value = Unit
+    }
+    fun resetEnroll() {
+        resetEnroll.value = Unit
+        loadStates()
     }
 }
