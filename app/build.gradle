@@ -13,8 +13,8 @@ ext.installationId = '9990'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.itransition.okay.sdkdemo"
-        minSdkVersion 21
+        applicationId "com.okay.android.sdkdemo"
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -47,7 +47,7 @@ repositories {
 }
 
 dependencies {
-    def dagger2_version = '2.22.1'
+    def dagger2_version = '2.23.1'
     def glassfish_annotation = "10.0-b28"
     def lifecycle_version = "2.0.0"
 
@@ -63,16 +63,13 @@ dependencies {
 
     implementation 'com.okaythis.sdk:psa:1.0.7'
 
-//    implementation ('androidx.core:core-ktx:1.0.2') {
-//        exclude module: 'support-v4'
-//    }
     implementation('com.google.firebase:firebase-messaging:18.0.0') {
         exclude module: 'support-v4'
     }
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
