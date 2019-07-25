@@ -15,4 +15,5 @@
     <string name="application_enrolled">Application enrolled</string>
     <string name="application_not_enrolled">Application not enrolled</string>
     <string name="reset_enroll">reset enroll</string>
+    <string name="link_tenant">Link tenant</string>
 </resources>

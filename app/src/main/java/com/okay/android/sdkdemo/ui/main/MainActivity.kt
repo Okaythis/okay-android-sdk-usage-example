@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 data?.run {
                     val resultData = PsaIntentUtils.enrollResultFromIntent(this)
                     resultData.let {
-                        preferenceRepository.saveExternalID(it.externalId)
+                        preferenceRepository.putExternalId(it.externalId)
                     }
                 }
                 Toast.makeText(this, getString(R.string.enroll_success), Toast.LENGTH_SHORT).show()
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startEnroll() {
         val spaEnrollData = SpaEnrollData(
-            preferenceRepository.getAppPns(),
+            preferenceRepository.getAppPNS(),
             BuildConfig.PUB_PSS_B64,
             BuildConfig.INSTALLATION_ID,
             BaseTheme(this).DEFAULT_PAGE_THEME,
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
     private fun startAuthorizationActivity(sessionID: Long) {
         val authorizationData = SpaAuthorizationData(
             sessionID,
-            PreferenceRepository(this).getAppPns(),
+            PreferenceRepository(this).getAppPNS(),
             BaseTheme(this).DEFAULT_PAGE_THEME,
             PsaType.OKAY
         )
