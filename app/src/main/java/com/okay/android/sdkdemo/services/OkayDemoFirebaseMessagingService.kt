@@ -35,7 +35,7 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String?) {
         if (BuildConfig.DEBUG) Log.d(TAG, "Refreshed token: $token")
         token?.run {
-            PreferenceRepository(this@OkayDemoFirebaseMessagingService).saveAppPNS(token)
+            PreferenceRepository(this@OkayDemoFirebaseMessagingService).putAppPNS(token)
         }
     }
 
