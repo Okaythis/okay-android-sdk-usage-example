@@ -9,12 +9,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewModel() {
 
+    val linkingCode = MutableLiveData<String>()
+
     val isEnrolled = MutableLiveData<Boolean>().apply {
         value = PsaManager.getInstance().isEnrolled
     }
 
     val startEnroll: MutableLiveData<Unit> = MutableLiveData()
     private val resetEnroll: MutableLiveData<Unit> = MutableLiveData()
+
+    val startLinkTenant: MutableLiveData<String> = MutableLiveData()
 
     fun loadStates() {
         isEnrolled.value = PsaManager.getInstance().isEnrolled
@@ -61,5 +65,11 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
     fun resetEnroll() {
         resetEnroll.value = Unit
         loadStates()
+    }
+
+    fun linkTenant() {
+        linkingCode.value?.let {linkingCode ->
+            startLinkTenant.value = linkingCode
+        }
     }
 }
