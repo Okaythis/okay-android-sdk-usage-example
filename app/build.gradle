@@ -39,8 +39,7 @@ android {
 }
 repositories {
     maven {
-        url 'https://dl.bintray.com/itrtestorg/maven'
-    //    url 'https://dl.bintray.com/okaythis/maven_e'
+        url 'https://dl.bintray.com/okaythis/maven'
     }
 }
 
