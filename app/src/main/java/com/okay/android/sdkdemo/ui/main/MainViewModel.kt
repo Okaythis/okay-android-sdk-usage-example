@@ -9,24 +9,30 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewModel() {
 
-    val linkingCode = MutableLiveData<String>()
-
     val isEnrolled = MutableLiveData<Boolean>().apply {
         value = PsaManager.getInstance().isEnrolled
     }
 
     val startEnroll: MutableLiveData<Unit> = MutableLiveData()
-    private val resetEnroll: MutableLiveData<Unit> = MutableLiveData()
 
     val startLinkTenant: MutableLiveData<String> = MutableLiveData()
 
+    private val resetEnroll: MutableLiveData<Unit> = MutableLiveData()
+
+    private var linkingCode: String = ""
+
     fun loadStates() {
-        isEnrolled.value = PsaManager.getInstance().isEnrolled
+        isEnrolled.postValue(PsaManager.getInstance().isEnrolled)
     }
 
     // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startPaymentCardTransaction() {
-        tenantRepository.sendBankTransactionRequest(128, null, BankTransactionType.PAYMENT_CARD, "AlphaOmega")
+        tenantRepository.sendBankTransactionRequest(
+            128,
+            null,
+            BankTransactionType.PAYMENT_CARD,
+            "AlphaOmega"
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 message.value = it.body()?.status?.message
@@ -37,7 +43,12 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
 
     // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startRemittanceTransaction() {
-        tenantRepository.sendBankTransactionRequest(200, "12345678", BankTransactionType.REMITTANCE, "AlphaOmega")
+        tenantRepository.sendBankTransactionRequest(
+            200,
+            "12345678",
+            BankTransactionType.REMITTANCE,
+            "AlphaOmega"
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 message.value = it.body()?.status?.message
@@ -48,7 +59,12 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
 
     // This is only to demonstrate possible user scenario. In yor application - it's yor responsibility how to perform transactions
     fun startECommerceTransaction() {
-        tenantRepository.sendBankTransactionRequest(499, "12345678", BankTransactionType.E_COMMERCE, "AlphaECommerce")
+        tenantRepository.sendBankTransactionRequest(
+            499,
+            "12345678",
+            BankTransactionType.E_COMMERCE,
+            "AlphaECommerce"
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 message.value = it.body()?.status?.message
@@ -62,14 +78,17 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
     fun startEnroll() {
         startEnroll.value = Unit
     }
+
     fun resetEnroll() {
         resetEnroll.value = Unit
         loadStates()
     }
 
+    fun setLinkingCode(code: String) {
+        linkingCode = code
+    }
+
     fun linkTenant() {
-        linkingCode.value?.let {linkingCode ->
-            startLinkTenant.value = linkingCode
-        }
+        startLinkTenant.value = linkingCode
     }
 }

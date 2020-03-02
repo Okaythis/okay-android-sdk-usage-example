@@ -1,150 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment">
+    <Button
+        android:id="@+id/btnECommerceTransaction"
+        style="@style/MainButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/e_commerce_transaction"
+        app:layout_constraintBottom_toTopOf="@+id/btnRemittanceTransaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartEnroll" />
 
-        <Button
-            android:id="@+id/btnECommerceTransaction"
-            style="@style/MainButtonStyle"
-            android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnRemittanceTransaction"
+        style="@style/MainButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/remittance_transaction"
+        app:layout_constraintBottom_toTopOf="@+id/btnCardTransaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnECommerceTransaction" />
+
+    <Button
+        android:id="@+id/btnStartEnroll"
+        style="@style/MainButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/btn_start_enroll"
+        app:layout_constraintBottom_toTopOf="@+id/btnECommerceTransaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twEnrollStatus" />
+
+    <Button
+        android:id="@+id/btnCardTransaction"
+        style="@style/MainButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/payment_card_transaction"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRemittanceTransaction" />
+
+    <Button
+        android:id="@+id/btnResetEnroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/reset_enroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLinkTenant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/link_tenant"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <CheckedTextView
+        android:id="@+id/twEnrollStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/btnStartEnroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twWelcome"
+        tools:text="@string/application_not_enrolled" />
+
+    <TextView
+        android:id="@+id/twWelcome"
+        style="@style/SecondaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/welcome_to_okay_sdk_demo_app"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/twEnrollStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCardTransaction">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLinkingCode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:onClick="@{(view) -> viewModel.startECommerceTransaction()}"
-            android:text="@string/e_commerce_transaction"
-            app:layout_constraintBottom_toTopOf="@+id/btnRemittanceTransaction"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStartEnroll" />
+            android:hint="Linking code" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnRemittanceTransaction"
-            style="@style/MainButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:onClick="@{(view) -> viewModel.startRemittanceTransaction()}"
-            android:text="@string/remittance_transaction"
-            app:layout_constraintBottom_toTopOf="@+id/btnCardTransaction"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnECommerceTransaction" />
-
-        <Button
-            android:id="@+id/btnStartEnroll"
-            style="@style/MainButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:onClick="@{(view) -> viewModel.startEnroll()}"
-            android:text="@string/btn_start_enroll"
-            android:visibility="@{viewModel.isEnrolled() ? view.GONE : view.VISIBLE}"
-            app:layout_constraintBottom_toTopOf="@+id/btnECommerceTransaction"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/twEnrollStatus" />
-
-        <Button
-            android:id="@+id/btnCardTransaction"
-            style="@style/MainButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:onClick="@{(view) -> viewModel.startPaymentCardTransaction()}"
-            android:text="@string/payment_card_transaction"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRemittanceTransaction" />
-
-        <CheckedTextView
-            android:id="@+id/twEnrollStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="@{safeUnbox(viewModel.isEnrolled())}"
-            android:gravity="center"
-            android:text="@{safeUnbox(viewModel.isEnrolled()) ? @string/application_enrolled : @string/application_not_enrolled}"
-            app:layout_constraintBottom_toTopOf="@+id/btnStartEnroll"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/twWelcome"
-            tools:text="@string/application_not_enrolled" />
-
-        <TextView
-            android:id="@+id/twWelcome"
-            style="@style/SecondaryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:text="@string/welcome_to_okay_sdk_demo_app"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toTopOf="@+id/twEnrollStatus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <Button
-            android:id="@+id/resetEnroll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:onClick="@{(view) -> viewModel.resetEnroll()}"
-            android:text="@string/reset_enroll"
-            android:visibility="@{viewModel.isEnrolled() ? view.VISIBLE : view.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCardTransaction">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Linking code"
-                android:text="@={viewModel.linkingCode}"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/link_tenant"
-            android:onClick="@{(view) -> viewModel.linkTenant()}"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.okay.android.sdkdemo.ui.main.MainViewModel" />
-
-        <variable
-            name="view"
-            type="android.view.View" />
-    </data>
-
-</layout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

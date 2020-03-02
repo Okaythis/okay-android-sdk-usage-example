@@ -16,8 +16,8 @@ android {
         applicationId "com.okay.android.sdkdemo"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0_not_binding"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "PUB_PSS_B64", "\"$pubPssB64\""
         buildConfigField "String", "INSTALLATION_ID", "\"$installationId\""
@@ -29,9 +29,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
-    }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
@@ -42,7 +39,8 @@ android {
 }
 repositories {
     maven {
-        url 'https://dl.bintray.com/okaythis/maven'
+        url 'https://dl.bintray.com/itrtestorg/maven'
+    //    url 'https://dl.bintray.com/okaythis/maven_e'
     }
 }
 
@@ -61,7 +59,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    implementation 'com.okaythis.sdk:psa:1.1.0'
+    implementation 'com.okaythis.sdk:psa:1.2.3_not_binding'
 
     implementation('com.google.firebase:firebase-messaging:20.1.0') {
         exclude module: 'support-v4'
