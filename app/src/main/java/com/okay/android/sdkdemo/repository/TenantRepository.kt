@@ -32,8 +32,8 @@ class TenantRepository {
             NetworkUtils.createRequestBody(
                 BankTransactionRequest(
                     amount,
-                    preferenceRepository.getExternalId()!!,
-                    preferenceRepository.getAppPNS()!!,
+                    preferenceRepository.externalId!!,
+                    preferenceRepository.appPNS!!,
                     msisdn,
                     type,
                     recipient

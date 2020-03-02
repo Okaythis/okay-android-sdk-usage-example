@@ -9,7 +9,9 @@ import com.okay.android.sdkdemo.repository.PreferenceRepository
 import com.okay.android.sdkdemo.ui.BaseTheme
 import com.protectoria.psa.PsaManager
 import com.protectoria.psa.api.PsaConstants
+import com.protectoria.psa.api.PsaFields
 import com.protectoria.psa.api.converters.PsaIntentUtils
+import com.protectoria.psa.api.entities.PsaErrorData
 import com.protectoria.psa.api.entities.SpaAuthorizationData
 import com.protectoria.psa.api.entities.SpaEnrollData
 import com.protectoria.psa.dex.common.data.enums.PsaType
@@ -61,7 +63,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 Toast.makeText(this, getString(R.string.enroll_success), Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, getString(R.string.enroll_error), Toast.LENGTH_SHORT).show()
+                val errorData = data?.getParcelableExtra<PsaErrorData>(PsaFields.PSA_FAILED_DATA)
+                Toast.makeText(this, getString(R.string.enroll_error) + errorData?.message, Toast.LENGTH_SHORT).show()
             }
         }
         // Here you can receive result of the authorization flow
@@ -84,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startEnroll() {
         val spaEnrollData = SpaEnrollData(
-            preferenceRepository.getAppPNS(),
+            preferenceRepository.appPNS,
             BuildConfig.PUB_PSS_B64,
             BuildConfig.INSTALLATION_ID,
             BaseTheme(this).DEFAULT_PAGE_THEME,
@@ -96,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     private fun startAuthorizationActivity(sessionID: Long) {
         val authorizationData = SpaAuthorizationData(
             sessionID,
-            PreferenceRepository(this).getAppPNS(),
+            PreferenceRepository(this).appPNS,
             BaseTheme(this).DEFAULT_PAGE_THEME,
             PsaType.OKAY
         )

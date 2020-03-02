@@ -2,17 +2,15 @@ package com.okay.android.sdkdemo
 
 import android.app.Application
 import com.itransition.protectoria.psa_multitenant.restapi.GatewayRestServer
-import com.okay.android.sdkdemo.network.RetrofitWrapper
-import com.okay.android.sdkdemo.di.ApplicationComponent
 import com.okay.android.sdkdemo.di.AppModule
+import com.okay.android.sdkdemo.di.ApplicationComponent
 import com.okay.android.sdkdemo.di.DaggerApplicationComponent
+import com.okay.android.sdkdemo.network.RetrofitWrapper
 import com.okay.android.sdkdemo.repository.PreferenceRepository
-import com.okay.android.sdkdemo.utils.SystemUtils
 import com.okay.android.sdkdemo.retrofit.RequestsApi
+import com.okay.android.sdkdemo.utils.SystemUtils
 import com.protectoria.psa.PsaManager
 import com.protectoria.psa.dex.common.data.json.PsaGsonFactory
-import dagger.android.DaggerApplication_MembersInjector
-import dagger.android.support.DaggerApplication
 
 class DemoApplication : Application() {
 
@@ -53,10 +51,10 @@ class DemoApplication : Application() {
     private fun initGatewayServer() {
         GatewayRestServer.init(PsaGsonFactory().create(), BuildConfig.SERVER_URL + "/gateway/")
     }
+
     companion object {
         lateinit var appComponent: ApplicationComponent
     }
-
 
 
 }

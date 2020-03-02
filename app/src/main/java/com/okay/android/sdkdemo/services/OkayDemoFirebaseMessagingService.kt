@@ -16,8 +16,8 @@ const val TAG = "Firebase"
 
 class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        Log.d(TAG, "From: " + remoteMessage!!.from!!)
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Log.d(TAG, "From: " + remoteMessage.from)
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
@@ -32,7 +32,7 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    override fun onNewToken(token: String?) {
+    override fun onNewToken(token: String) {
         if (BuildConfig.DEBUG) Log.d(TAG, "Refreshed token: $token")
         token?.run {
             PreferenceRepository(this@OkayDemoFirebaseMessagingService).putAppPNS(token)
