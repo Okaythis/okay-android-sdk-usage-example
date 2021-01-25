@@ -41,7 +41,7 @@ class OkayDemoFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun startMainActivityForAuth(bundle: Bundle) {
         startActivity(Intent(this, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             putExtras(bundle)
         })
     }

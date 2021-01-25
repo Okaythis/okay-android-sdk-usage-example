@@ -11,6 +11,7 @@ import com.okay.android.sdkdemo.retrofit.RequestsApi
 import com.okay.android.sdkdemo.utils.SystemUtils
 import com.protectoria.psa.PsaManager
 import com.protectoria.psa.dex.common.data.json.PsaGsonFactory
+import com.protectoria.psa.dex.ui.texts.TransactionResourceProvider
 
 class DemoApplication : Application() {
 
@@ -36,8 +37,9 @@ class DemoApplication : Application() {
     }
 
     private fun initPsa() {
-        val psaManager = PsaManager.init(this, MyExceptionLogger())
+        val psaManager = PsaManager.init(this, MyExceptionLogger(), TransactionResourceProvider(this))
         psaManager.setPssAddress(BuildConfig.SERVER_URL)
+        psaManager.setScreenshotEnabled(true)
     }
 
     private fun initUUID() {
