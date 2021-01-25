@@ -105,7 +105,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/tenant_linking_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -116,9 +116,10 @@
             app:layout_constraintTop_toBottomOf="@+id/btnCardTransaction">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_tenant_linking_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Linking code"
+                android:hint="@string/hint_linking_code"
                 android:text="@={viewModel.linkingCode}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,8 +131,8 @@
             android:layout_marginEnd="8dp"
             android:text="@string/link_tenant"
             android:onClick="@{(view) -> viewModel.linkTenant()}"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintEnd_toEndOf="@+id/tenant_linking_code"
+            app:layout_constraintTop_toBottomOf="@+id/tenant_linking_code" />
 
         <Button
             android:id="@+id/btnIsEnrolled"
@@ -139,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="16dp"
-            android:text="is Enrolled"
+            android:text="@string/btn_is_enrolled"
             android:onClick="@{(view) -> viewModel.checkEnrollState()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

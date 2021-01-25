@@ -1,9 +1,9 @@
 package com.okay.android.sdkdemo.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.okay.android.sdkdemo.*
 import com.okay.android.sdkdemo.repository.PreferenceRepository
 import com.okay.android.sdkdemo.ui.BaseTheme
@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         //If user granted all required permissions - you can start Enroll
         if (!PsaManager.getInstance().isEnrolled) {
@@ -61,10 +65,14 @@ class MainActivity : AppCompatActivity() {
                         preferenceRepository.putExternalId(it.externalId)
                     }
                 }
-                Toast.makeText(this, getString(R.string.enroll_success), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enroll_success), Toast.LENGTH_LONG).show()
             } else {
                 val errorData = data?.getParcelableExtra<PsaErrorData>(PsaFields.PSA_FAILED_DATA)
-                Toast.makeText(this, getString(R.string.enroll_error) + errorData?.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.enroll_error, errorData?.status, errorData?.message),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         // Here you can receive result of the authorization flow

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Okay SDK demo</string>
     <string name="enroll_success">Enrollment successful</string>
-    <string name="enroll_error">Enrollment error</string>
+    <string name="enroll_error">Enrollment error. Status: %1$s Message: %2$s</string>
     <string name="btn_start_enroll">Start enroll</string>
     <string name="already_enrolled">Already enrolled</string>
     <string name="welcome_to_okay_sdk_demo_app">Welcome to Okay SDK demo app</string>
@@ -16,4 +16,7 @@
     <string name="application_not_enrolled">Application not enrolled</string>
     <string name="reset_enroll">reset enroll</string>
     <string name="link_tenant">Link tenant</string>
+    <string name="tenant_linking_successful">Tenant linking successful. Tenant name: %s</string>
+    <string name="hint_linking_code">Linking code</string>
+    <string name="btn_is_enrolled">is Enrolled</string>
 </resources>

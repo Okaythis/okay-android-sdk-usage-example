@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.itransition.protectoria.psa_multitenant.protocol.scenarios.linking.LinkingScenarioListener
 import com.itransition.protectoria.psa_multitenant.state.ApplicationState
 import com.okay.android.sdkdemo.BuildConfig
@@ -21,13 +21,16 @@ import com.okay.android.sdkdemo.ui.BaseTheme
 import com.protectoria.psa.PsaManager
 import com.protectoria.psa.api.entities.SpaEnrollData
 import com.protectoria.psa.dex.common.data.enums.PsaType
+import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
 class MainFragment : Fragment(), LinkingScenarioListener {
 
     private lateinit var dataBinding: MainFragmentBinding
+
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
+
     @Inject
     lateinit var preferenceRepository: PreferenceRepository
 
@@ -44,8 +47,8 @@ class MainFragment : Fragment(), LinkingScenarioListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+    ): View {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.apply {
             getMessage().observe(viewLifecycleOwner, Observer { message ->
                 message?.let {
@@ -57,7 +60,7 @@ class MainFragment : Fragment(), LinkingScenarioListener {
                     PsaManager.startEnrollmentActivity(
                         activity,
                         SpaEnrollData(
-                            preferenceRepository.getAppPNS(),
+                            preferenceRepository.appPNS,
                             BuildConfig.PUB_PSS_B64,
                             BuildConfig.INSTALLATION_ID,
                             BaseTheme(this).DEFAULT_PAGE_THEME,
@@ -65,12 +68,11 @@ class MainFragment : Fragment(), LinkingScenarioListener {
                         )
                     )
                 }
-
             })
-            getResetEnroll().observe(this@MainFragment, Observer {
+            getResetEnroll().observe(viewLifecycleOwner, {
                 PsaManager.getInstance().resetEnroll()
             })
-            startLinkTenant.observe(viewLifecycleOwner, Observer {
+            startLinkTenant.observe(viewLifecycleOwner, {
                 PsaManager.getInstance().linkTenant(
                     it, preferenceRepository, this@MainFragment
                 )
@@ -87,14 +89,15 @@ class MainFragment : Fragment(), LinkingScenarioListener {
         viewModel.loadStates()
     }
 
-    override fun onLinkingCompletedSuccessful(tenantId : Long, tenantName: String?) {
-        Toast.makeText(context, "tenant name $tenantName", Toast.LENGTH_SHORT).show()
+    override fun onLinkingCompletedSuccessful(tenantId: Long, tenantName: String?) {
+        et_tenant_linking_code.text?.clear()
+        Toast.makeText(context, getString(R.string.tenant_linking_successful, tenantName), Toast.LENGTH_SHORT).show()
         Log.i("LINKING", "tenant ID = $tenantId")
     }
 
     override fun onLinkingFailed(linkingError: ApplicationState?) {
-        Toast.makeText(context, "linking error $linkingError", Toast.LENGTH_SHORT).show()
-        Log.i("LINKING", "linking error $linkingError")
+        Toast.makeText(context, "linking error: ${linkingError?.name}", Toast.LENGTH_LONG).show()
+        Log.i("LINKING", "linking error: ${linkingError?.name}")
     }
 
 }
