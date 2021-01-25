@@ -21,7 +21,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "PUB_PSS_B64", "\"$pubPssB64\""
         buildConfigField "String", "INSTALLATION_ID", "\"$installationId\""
-        buildConfigField "String", "SERVER_URL", "\"http://172.20.64.68:10080\""
+        buildConfigField "String", "SERVER_URL", "\"https://stage.quack.click\""
     }
     buildTypes {
         release {
