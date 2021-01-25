@@ -72,4 +72,9 @@ class MainViewModel(private val tenantRepository: TenantRepository) : BaseViewMo
             startLinkTenant.value = linkingCode
         }
     }
+
+    fun checkEnrollState() {
+        isEnrolled.value = PsaManager.getInstance().isEnrolled
+        message.value = "is Enrolled = ${isEnrolled.value}"
+    }
 }
