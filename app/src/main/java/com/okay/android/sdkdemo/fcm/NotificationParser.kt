@@ -2,7 +2,7 @@ package com.okay.android.sdkdemo.fcm
 
 import com.google.gson.Gson
 import com.okay.android.sdkdemo.BuildConfig.DEBUG
-import com.protectoria.pss.dto.notification.WakeUpNotification
+import com.protectoria.pss.dto.notification.Notification
 
 interface NotificationParser<N> {
     fun extractSpsNotification(notification: RemoteNotification): N?
@@ -27,10 +27,10 @@ abstract class BaseNotificationParser<N>(private val gson: Gson) :
 }
 
 
-class WakeUpNotificationParser(gson: Gson) : BaseNotificationParser<WakeUpNotification>(gson) {
+class WakeUpNotificationParser(gson: Gson) : BaseNotificationParser<Notification>(gson) {
 
-    override fun getNotificationType(): Class<WakeUpNotification> {
-        return WakeUpNotification::class.java
+    override fun getNotificationType(): Class<Notification> {
+        return Notification::class.java
     }
 }
 

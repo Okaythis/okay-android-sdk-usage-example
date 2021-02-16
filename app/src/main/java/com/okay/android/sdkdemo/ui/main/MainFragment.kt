@@ -89,8 +89,9 @@ class MainFragment : Fragment(), LinkingScenarioListener {
         viewModel.loadStates()
     }
 
-    override fun onLinkingCompletedSuccessful(tenantId: Long, tenantName: String?) {
+    override fun onLinkingCompletedSuccessful(tenantId: Long, tenantName: String) {
         et_tenant_linking_code.text?.clear()
+        preferenceRepository.putTenantName(tenantName)
         Toast.makeText(context, getString(R.string.tenant_linking_successful, tenantName), Toast.LENGTH_SHORT).show()
         Log.i("LINKING", "tenant ID = $tenantId")
     }

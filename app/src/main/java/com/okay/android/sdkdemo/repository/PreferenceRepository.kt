@@ -4,11 +4,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.itransition.protectoria.psa_multitenant.data.SpaStorage
 import javax.inject.Inject
+private const val APP_PNS = "app_pns"
+private const val UUID = "uuid"
+private const val EXTERNAL_ID = "external_id"
+private const val USER_PREFERENCE = "user_preference"
+private const val TENANT_NAME = "tenant_name"
 
 class PreferenceRepository @Inject constructor(context: Context) : SpaStorage {
 
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
+
+    fun putTenantName(tenantName: String) {
+        sharedPreferences.edit().putString(TENANT_NAME, tenantName).apply()
+    }
+
+    fun getTenantName() : String? = sharedPreferences.getString(TENANT_NAME, null);
 
     override fun putAppPNS(appPns: String) {
         sharedPreferences.edit().putString(APP_PNS, appPns).apply()
@@ -52,11 +63,4 @@ class PreferenceRepository @Inject constructor(context: Context) : SpaStorage {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
-    companion object {
-        private const val APP_PNS = "app_pns"
-        private const val UUID = "uuid"
-        private const val EXTERNAL_ID = "external_id"
-        private const val USER_PREFERENCE = "user_preference"
-    }
 }
